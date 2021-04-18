@@ -1,4 +1,4 @@
-# Servicefy API
+# Node.js API
 
 API using Node.JS with TypeScript
 
