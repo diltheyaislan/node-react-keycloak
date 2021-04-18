@@ -1,0 +1,67 @@
+version: '3'
+
+volumes:
+  app_postgres_data:
+    driver: local
+
+services:
+  postgres:
+    image: postgres
+    container_name: ${DB_CONTAINER_NAME}
+    volumes:
+      - app_postgres_data:/var/lib/postgresql/data
+      - ./docker/pg-init-scripts:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_MULTIPLE_DATABASES: ${KEYCLOAK_DB_NAME}, ${APP_DB_NAME}
+    ports:
+      - 5432:5432
+  
+  keycloak:
+    build:
+      context: ./keycloak
+      dockerfile: Dockerfile
+    image: keycloak
+    container_name: ${KEYCLOAK_CONTAINER_NAME}
+    command: 
+      -Dkeycloak.profile.feature.upload_scripts=enabled
+      -Dkeycloak.import=/opt/jboss/keycloak/realm-App-export.json
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: ${DB_CONTAINER_NAME}
+      DB_DATABASE: ${KEYCLOAK_DB_NAME}
+      DB_USER: ${POSTGRES_USER}
+      DB_SCHEMA: public
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KEYCLOAK_USER: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+      KEYCLOAK_LOGLEVEL: DEBUG
+      WILDFLY_LOGLEVEL: DEBUG
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+  
+  node:
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    image: node
+    container_name: ${NODE_CONTAINER_NAME}
+    entrypoint: dockerize -wait tcp://${DB_CONTAINER_NAME}:5432 -timeout 20s docker-entrypoint.sh node ./shared/infra/http/server.js
+    ports:
+      - 3333:3333
+    depends_on:
+      - postgres
+
+  react:
+    build:
+      context: ./react
+      dockerfile: Dockerfile
+    image: react
+    container_name: ${REACT_CONTAINER_NAME}
+    ports:
+      - 3000:80
+    depends_on:
+      - keycloak
