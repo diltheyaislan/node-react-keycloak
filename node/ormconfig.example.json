@@ -1,0 +1,42 @@
+[
+  {
+    "name": "default",
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "password",
+    "database": "app",
+    "entities": [
+      "./src/modules/**/infra/typeorm/entities/*.ts",
+      "./modules/**/infra/typeorm/entities/*.js"
+    ],
+    "migrations": [
+      "./src/shared/infra/typeorm/migrations/*.ts",
+      "./shared/infra/typeorm/migrations/*.js"
+    ],
+    "cli": {
+      "migrationsDir": "./src/shared/infra/typeorm/migrations"
+    }
+  },
+  {
+    "name": "seed",
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "password",
+    "database": "app",
+    "entities": [
+      "./src/modules/**/infra/typeorm/entities/*.ts",
+      "./modules/**/infra/typeorm/entities/*.js"
+    ],
+    "migrations": [
+      "./src/shared/infra/typeorm/seeds/*.ts",
+      "./shared/infra/typeorm/seeds/*.js"
+    ],
+    "cli": {
+      "migrationsDir": "./src/shared/infra/typeorm/seeds"
+    }
+  }
+]

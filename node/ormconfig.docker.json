@@ -1,0 +1,54 @@
+[
+  {
+    "name": "default",
+    "type": "postgres",
+    "host": "app_db",
+    "port": 5432,
+    "username": "postgres",
+    "password": "password",
+    "database": "app",
+    "entities": [
+      "./src/modules/**/infra/typeorm/entities/*.ts",
+      "./modules/**/infra/typeorm/entities/*.js",
+      "./dist/modules/**/infra/typeorm/entities/*.js",
+      "./app/dist/modules/**/infra/typeorm/entities/*.js",
+      "/usr/src/app/dist/modules/**/infra/typeorm/entities/*.js"
+    ],
+    "migrations": [
+      "./src/shared/infra/typeorm/migrations/*.ts",
+      "./shared/infra/typeorm/migrations/*.js",
+      "./dist/shared/infra/typeorm/migrations/*.js",
+      "./app/dist/shared/infra/typeorm/migrations/*.js",
+      "/usr/src/app/dist/shared/infra/typeorm/migrations/*.js"
+    ],
+    "cli": {
+      "migrationsDir": "./src/shared/infra/typeorm/migrations"
+    }
+  },
+  {
+    "name": "seed",
+    "type": "postgres",
+    "host": "app_db",
+    "port": 5432,
+    "username": "postgres",
+    "password": "password",
+    "database": "app",
+    "entities": [
+      "./src/modules/**/infra/typeorm/entities/*.ts",
+      "./modules/**/infra/typeorm/entities/*.js",
+      "./dist/modules/**/infra/typeorm/entities/*.js",
+      "./app/dist/modules/**/infra/typeorm/entities/*.js",
+      "/usr/src/app/dist/modules/**/infra/typeorm/entities/*.js"
+    ],
+    "migrations": [
+      "./src/shared/infra/typeorm/seeds/*.ts",
+      "./shared/infra/typeorm/seeds/*.js",
+      "./dist/shared/infra/typeorm/migrations/*.js",
+      "./app/dist/shared/infra/typeorm/migrations/*.js",
+      "/usr/src/app/dist/shared/infra/typeorm/migrations/*.js"
+    ],
+    "cli": {
+      "migrationsDir": "./src/shared/infra/typeorm/seeds"
+    }
+  }
+]
