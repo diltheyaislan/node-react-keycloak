@@ -53,7 +53,7 @@ In the root directory of the repository:
 
 After installation, run `docker-compose up -d`
 
-## Database
+#### Database
 
 A container with a PostgreSQL image is started. When starting the container for the first time, two databases are created, one for the application and the other for the Keycloak. The application database is called `app` by default and the Keycloak database is called `app_keycloak`.
 
@@ -63,7 +63,7 @@ Note: these names can be changed in the `.\.env` file.
 
 Can be accessed by hostname `localhost` or `host.docker.internal` on the port `5432` by default.
 
-### Keycloak
+#### Keycloak
 
 A container with the Keycloak image is executed. The Custom Provider (**app-db-provider**) is deployed and a realm is imported based on the `.\keycloak\real-App-export.json` file.
 
@@ -71,7 +71,7 @@ The name of the container is called `app_keycloak`.
 
 Can be accessed at <http://localhost:8080> by default.
 
-### Back-end
+#### Back-end
 
 A container with the Node.js image is executed. The database connection and Keycloak integration files are loaded into the container.
 
@@ -81,7 +81,7 @@ The name of the container is called `app_node`.
 
 Can be accessed at <http://localhost:3333> by default.
 
-### Front-end
+#### Front-end
 
 A container with the nginx image is executed to run React application. The Keycloak integration file is loaded into the container.
 
