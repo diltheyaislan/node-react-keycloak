@@ -1,0 +1,8 @@
+{
+  "realm": "App",
+  "auth-server-url": "http://host.docker.internal:8080/auth/",
+  "ssl-required": "external",
+  "resource": "app-frontend",
+  "public-client": true,
+  "confidential-port": 0
+}

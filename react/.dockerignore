@@ -1,0 +1,12 @@
+.vscode
+build
+node_modules
+.editorconfig
+.env
+.eslintrc.json
+.eslintignore
+prettier.config.js
+README.md
+*.log
+*.lock
+public/keycloak.json
