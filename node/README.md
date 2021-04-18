@@ -1,6 +1,6 @@
 # Servicefy API
 
-Servicefy API using Node.JS with TypeScript
+API using Node.JS with TypeScript
 
 ## Extensions for VS Code
 
